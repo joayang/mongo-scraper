@@ -42,7 +42,10 @@ hbs.registerHelper('each_upto', function(ary, max, options) {
 var PORT = process.env.PORT || 7000;
 mongoose.Promise = Promise;
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoScrapers";
-mongoose.connect(MONGODB_URI);
+mongoose.connect(MONGODB_URI,  { useNewUrlParser: true }, function() {
+  console.log('connection successfull');
+});
+//mongoose.connect("mongodb://dylan:password1@ds161062.mlab.com:61062/mongoscrapers")
 
 // Routes
 
