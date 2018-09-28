@@ -76,24 +76,26 @@ app.get("/scrape", function(req, res) {
 
       var result = {};
 
-      result.link = $(this).children("story-body").find("a").attr("href");
+      result.link = $(this).children().find("a").attr("href");
       result.title = $(this).find("h2").text().trim();
       result.summary = $(this).find("p.summary").text();
     //   result.image = $(this).find("a").find("img").attr("src");
       result.saved = false;
-
       if (result.title && result.link && result.summary) {
         counter++;
         db.Article
         .create(result)
         .then(function(dbArticle) {
-          res.send("You've scraped " + counter + " articles!");
+          //res.send("You've scraped " + counter + " articles!");
+          console.log(dbArticle)
         })
         .catch(function(err) {
-          res.json(err);
+          //res.json(err);
+          console.log(err)
         });
       };
     });
+    res.send("success")
   });
 });
 
